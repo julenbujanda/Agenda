@@ -16,6 +16,10 @@ public class Interfaz {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Imprime el menú por pantalla
+     * @return Número de la opción escogida por el usuario
+     */
     public int mostrarMenu() {
         System.out.println("-----AGENDA-----\n" +
                 "1. Insertar contacto\n" +
@@ -37,6 +41,9 @@ public class Interfaz {
         return opcion;
     }
 
+    /**
+     * Llama al modelo para insertar un contacto en la agenda
+     */
     public void insertarContacto() {
         System.out.println("Indique el nombre del contacto: ");
         String nombre = scanner.nextLine();
@@ -45,6 +52,9 @@ public class Interfaz {
         modelo.guardarContacto(nombre, telefono);
     }
 
+    /**
+     * Muestra una lista de todos los contactos
+     */
     public void listarContactos() {
         System.out.println("-----LISTA DE CONTACTOS-----");
         Agenda<Contacto> agenda = modelo.getAgenda();
@@ -55,6 +65,10 @@ public class Interfaz {
         }
     }
 
+    /**
+     * Busca entre los contactos para mostrar aquellos que contienen
+     * la palabra indicada
+     */
     public void buscarContacto() {
         System.out.print("-----BUSCAR CONTACTOS-----\n" +
                 "Indique el nombre del contacto: ");
