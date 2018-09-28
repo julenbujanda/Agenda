@@ -1,5 +1,5 @@
+import java.util.Iterator;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class Interfaz {
 
@@ -42,9 +42,11 @@ public class Interfaz {
 
     public void listarContactos() {
         System.out.println("-----LISTA DE CONTACTOS-----");
-        TreeMap<String, Long> agenda = modelo.getAgenda();
-        for (String nombre : agenda.keySet()) {
-            System.out.println(nombre + ": " + agenda.get(nombre));
+        Agenda<Contacto> agenda = modelo.getAgenda();
+        Iterator<Contacto> iterator = agenda.iterator();
+        while (iterator.hasNext()) {
+            Contacto contacto = iterator.next();
+            System.out.println(contacto.getNombre() + ": " + contacto.getNumero());
         }
     }
 
@@ -52,12 +54,21 @@ public class Interfaz {
         System.out.print("-----BUSCAR CONTACTOS-----\n" +
                 "Indique el nombre del contacto: ");
         String nombre = scanner.nextLine();
-        if (modelo.getAgenda().containsKey(nombre)) {
-            System.out.println(nombre + ": " + modelo.getAgenda().get(nombre));
-        } else {
-            System.out.println("Contacto no encontrado.");
+        Agenda<Contacto> agenda = modelo.getAgenda();
+        Iterator<Contacto> iterator = agenda.iterator();
+        Agenda<Contacto> resultados = new Agenda<>();
+        while (iterator.hasNext()) {
+            Contacto contacto = iterator.next();
+            if (contacto.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
+                resultados.add(contacto);
+            }
         }
-
+        System.out.println("Se han encontrado los siguientes contactos:");
+        iterator = resultados.iterator();
+        while (iterator.hasNext()) {
+            Contacto contacto = iterator.next();
+            System.out.println(contacto.getNombre() + ": " + contacto.getNumero());
+        }
     }
 
 }
