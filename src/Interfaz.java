@@ -1,6 +1,11 @@
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Clase interfaz que se encargará de imprimir en pantalla y llamará al modelo
+ *
+ * @author Julen Bujanda
+ */
 public class Interfaz {
 
     private static Scanner scanner;

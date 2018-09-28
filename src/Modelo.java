@@ -1,11 +1,21 @@
 import java.io.*;
 import java.util.Iterator;
 
+/**
+ * Clase modelo que se encargará de acceder al archivo para leer
+ * y escribir sus datos
+ *
+ * @author Julen Bujanda
+ */
 public class Modelo {
 
     private Agenda<Contacto> agenda;
     private File archivo;
 
+    /**
+     * Constructor del modelo que crea el archivo "agenda.csv" si aún no existe
+     * y lee sus datos para guardarlos en la variable agenda
+     */
     public Modelo() {
         agenda = new Agenda<>();
         archivo = new File("agenda.csv");
@@ -22,6 +32,13 @@ public class Modelo {
         }
     }
 
+    /**
+     * Método que guarda el contacto tanto en la variable agenda como
+     * en el archivo "agenda.csv"
+     *
+     * @param nombre Nombre a guardar
+     * @param numero Número de teléfono a guardar
+     */
     public void guardarContacto(String nombre, long numero) {
         agenda.add(new Contacto(nombre, numero));
         try {

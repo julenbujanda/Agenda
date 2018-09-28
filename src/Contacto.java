@@ -1,3 +1,8 @@
+/**
+ * Clase contacto que representa cada dato de la agenda
+ *
+ * @author Julen Bujanda
+ */
 public class Contacto {
 
     private String nombre;
