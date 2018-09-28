@@ -27,7 +27,7 @@ public class Modelo {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
             for (String nombres : agenda.keySet()) {
-                bufferedWriter.append(nombres + ";" + agenda.get(nombres));
+                bufferedWriter.append(nombres + ";" + agenda.get(nombres) + "\n");
             }
             bufferedWriter.flush();
         } catch (IOException e) {
