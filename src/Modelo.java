@@ -1,13 +1,13 @@
 import java.io.*;
-import java.util.TreeMap;
+import java.util.Iterator;
 
 public class Modelo {
 
-    private TreeMap<String, Long> agenda;
+    private Agenda<Contacto> agenda;
     private File archivo;
 
     public Modelo() {
-        agenda = new TreeMap<>();
+        agenda = new Agenda<>();
         archivo = new File("agenda.csv");
         try {
             archivo.createNewFile();
@@ -15,7 +15,7 @@ public class Modelo {
             String linea;
             while ((linea = bufferedReader.readLine()) != null) {
                 String[] datosLinea = linea.split(";");
-                agenda.put(datosLinea[0], Long.parseLong(datosLinea[1]));
+                agenda.add(new Contacto(datosLinea[0], Long.parseLong(datosLinea[1])));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -23,11 +23,13 @@ public class Modelo {
     }
 
     public void guardarContacto(String nombre, long numero) {
-        agenda.put(nombre, numero);
+        agenda.add(new Contacto(nombre, numero));
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
-            for (String nombres : agenda.keySet()) {
-                bufferedWriter.append(nombres + ";" + agenda.get(nombres) + "\n");
+            Iterator<Contacto> iterator = agenda.iterator();
+            while (iterator.hasNext()) {
+                Contacto contacto = iterator.next();
+                bufferedWriter.append(contacto.getNombre() + ";" + contacto.getNumero() + "\n");
             }
             bufferedWriter.flush();
         } catch (IOException e) {
@@ -35,7 +37,7 @@ public class Modelo {
         }
     }
 
-    public TreeMap<String, Long> getAgenda() {
+    public Agenda<Contacto> getAgenda() {
         return agenda;
     }
 }
