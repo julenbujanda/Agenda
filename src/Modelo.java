@@ -20,12 +20,13 @@ public class Modelo {
         agenda = new Agenda<>();
         archivo = new File("agenda.csv");
         try {
-            archivo.createNewFile();
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
-            String linea;
-            while ((linea = bufferedReader.readLine()) != null) {
-                String[] datosLinea = linea.split(";");
-                agenda.add(new Contacto(datosLinea[0], Long.parseLong(datosLinea[1])));
+            if (!archivo.createNewFile()) {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while ((linea = bufferedReader.readLine()) != null) {
+                    String[] datosLinea = linea.split(";");
+                    agenda.add(new Contacto(datosLinea[0], Long.parseLong(datosLinea[1])));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
